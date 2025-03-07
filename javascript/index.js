@@ -19,7 +19,7 @@ test();
 
 function func() {
   var a = "Hello";
-  let b = "Namaste";
+  // let b = "Namaste";
 
   if (true) {
     let a = "Hi"; // Legal Shadowing
