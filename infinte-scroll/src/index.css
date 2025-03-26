@@ -1,64 +1,28 @@
-
-
-
-.product{
+.product-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
+  justify-content: center;
 }
 
-.map_container{
-  border:1px solid #000000;
- display: flex;
- margin-left: 25px;
- flex-direction: column;
- text-align: center;
-  width: 240px;
-  margin: top 12px; ;
+.product-card {
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
 }
 
-
-.img-box{
-  padding-bottom: 12px;
-background-color: cadetblue;
-  height: 200px;
+.product-img {
   width: 100%;
-  cursor: pointer;
+  height: 100px;
   object-fit: cover;
-}
-.pagination{
-  display: flex ;
-   align-items: center;
-   gap: 12px;
-   margin-top: 12px;
-}
-.pagination{
-  display: flex;
-  justify-content: center;
-  margin-top: 70px;
-}
-.pagination >span{
-
-  border: 2px solid gray;
-  padding: 12px 30px;
-  cursor: pointer;
-}
-.selected_pagination{
-  background-color: gray;
+  border-radius: 5px;
 }
 
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.loading {
+  font-size: 18px;
+  font-weight: bold;
+  color: blue;
   margin: 20px 0;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #007bff; /* Change to your theme color */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
 }

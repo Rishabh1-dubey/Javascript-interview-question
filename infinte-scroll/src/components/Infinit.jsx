@@ -1,75 +1,64 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 
-const Infinite = () => {
-  const [product, setProduct] = useState([]);
-  const [pages, setPages] = useState(1);
+const InfiniteScroll = () => {
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const fetchDataProduct = async () => {
+  const fetchProducts = async () => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    // Simulate loading delay
+    await new Promise((resolve) => setTimeout(resolve, 1000)); 
+
     const response = await fetch(
-      `https://dummyjson.com/products?limit=${pages * 10}`
+      `https://dummyjson.com/products?limit=10&skip=${(page - 1) * 10}`
     );
     const data = await response.json();
 
     if (data && data.products) {
-      setProduct((prev) => [...prev, ...data.products]); // Append new products
-      setPages((prev) => prev + 1); // Increment pages for next fetch
+      setProducts((prev) => [...prev, ...data.products]); // Append new products
+      setPage((prev) => prev + 1);
     }
+
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchDataProduct();
+    fetchProducts();
   }, []);
 
-  // Throttling Implementation
-  const myThrottle = (cb, d) => {
-    let last = 0;
-
-    return (...args) => {
-      let now = new Date().getTime();
-      if (now - last < d) return; // ✅ Fixed condition
-      last = now;
-      cb(...args);
-    };
-  };
-
-  const handleScroll = useCallback(
-    myThrottle(() => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 500 >
-        document.documentElement.offsetHeight
-      ) {
-        fetchDataProduct();
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 10 >=
+      document.documentElement.offsetHeight
+    ) {
+      if (!loading) {
+        fetchProducts();
       }
-    }, 500),
-    []
-  );
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, [loading]);
 
   return (
-    <div className="main_container">
-      {product.length > 0 && (
-        <div className="product">
-          {product.map((prod) => (
-            <div key={prod.id} className="map_container">
-              <img className="img-box" src={prod.thumbnail} alt="" />
-              <div>{prod.title}</div>
-            </div>
-          ))}
-        </div>
-      )}
-      {loading &&( <div className="loading-container">
-    <div className="spinner"></div>
-  </div>)}
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h2>Infinite Scroll Example</h2>
+      <div className="product-container">
+        {products.map((prod) => (
+          <div key={prod.id} className="product-card">
+            <img src={prod.thumbnail} alt={prod.title} className="product-img" />
+            <p>{prod.title}</p>
+          </div>
+        ))}
+      </div>
+
+      {loading && <p className="loading">Loading...</p>}
     </div>
   );
 };
 
-export default Infinite;
+export default InfiniteScroll;
