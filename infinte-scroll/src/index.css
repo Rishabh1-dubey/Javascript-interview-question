@@ -46,3 +46,19 @@ background-color: cadetblue;
 .selected_pagination{
   background-color: gray;
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #007bff; /* Change to your theme color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
