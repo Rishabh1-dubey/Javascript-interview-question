@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import StarRating from './components/Star-Rating'
+import Basicfrom from './components/Basicfrom'
 
 function App() {
  
@@ -14,6 +15,7 @@ const handleRatingChange=(newRating)=>{
     <div>
       <StarRating  size={5} rating={CurrentRating} onChange={handleRatingChange} />
       <p>Current star Rating : {CurrentRating}</p>
+      <Basicfrom/>
     </div>
   )
 }

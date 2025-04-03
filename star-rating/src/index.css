@@ -24,4 +24,12 @@
 
 .star.active {
   color: rgb(100, 86, 7);
+  
+}
+.input{
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+
 }
