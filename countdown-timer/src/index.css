@@ -1,0 +1,42 @@
+:root {
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+}
+
+
+body {
+  background-color: rgb(153, 226, 202);
+  text-align: center;
+}
+
+.container {
+
+  padding: 12px;
+}
+
+.input-container input {
+  padding: 12px;
+  width: 20px;
+  margin-right: 12px;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 12px 22px 12px 22px;
+  border-radius: 10px;
+  background-color: rgb(205, 143, 143);
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 12px;
+}
+.after-click{
+  display: flex;
+  justify-content: center;
+align-items: center;
+font-size: 40px;
+margin-bottom: 22px;
+cursor: pointer;
+}
