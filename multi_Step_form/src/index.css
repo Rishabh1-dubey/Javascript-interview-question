@@ -1,0 +1,30 @@
+.app{
+ 
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+.container{
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.container label{
+  font-size: 30px;
+  font-weight: 600;
+}
+.container input
+{
+  padding: 12px;
+
+}
+.btn{
+
+  border: 3px solid red;
+  width: 80px;
+  height: 30px;
+  border-radius: 20px;
+  background-color: aqua;
+  cursor: pointer;
+}
