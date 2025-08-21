@@ -25,6 +25,11 @@ const TodoList = () => {
       })
     );
   };
+
+  const deleteTodo = (id) => {
+    setTodoList(todoList.filter((t) => t.id != id));
+  };
+
   return (
     <div>
       <input
@@ -40,11 +45,17 @@ const TodoList = () => {
           {todoList.map((t) => (
             <li key={t.id}>
               <div style={{ display: "flex", gap: "5px" }}>
-                <input onChange={()=>{toggleCompleted(t.id)}} type="checkbox" checked={t.completed} />
+                <input
+                  onChange={() => {
+                    toggleCompleted(t.id);
+                  }}
+                  type="checkbox"
+                  checked={t.completed}
+                />
                 <span className={t.completed ? "line-through" : ""}>
                   {t.text}
                 </span>
-                <button>Delete</button>
+                <button onClick={()=>{deleteTodo(t.id)}}>Delete</button>
               </div>
             </li>
           ))}
