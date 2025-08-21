@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+
+const TodoList = () => {
+  const [input, setInput] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
+  const AddtoItem = () => {
+    const item = {
+      id: todoList.length + 1,
+      text: input,
+      completed: false,
+    };
+    setTodoList((prev) => [...prev, item]);
+    setInput("");
+  };
+
+  const toggleCompleted = (id) => {
+    setTodoList(
+      todoList.map((t) => {
+        if (t.id === id) {
+          return { ...t, completed: !t.completed };
+        } else {
+          return t;
+        }
+      })
+    );
+  };
+  return (
+    <div>
+      <input
+        value={input}
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+        type="text"
+      />
+      <button onClick={AddtoItem}>Add</button>
+      <div>
+        <ul>
+          {todoList.map((t) => (
+            <li key={t.id}>
+              <div style={{ display: "flex", gap: "5px" }}>
+                <input onChange={()=>{toggleCompleted(t.id)}} type="checkbox" checked={t.completed} />
+                <span className={t.completed ? "line-through" : ""}>
+                  {t.text}
+                </span>
+                <button>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default TodoList;

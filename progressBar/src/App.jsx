@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./App.css";
 import ProgressBarPro from "./componets/ProgressBar_Pro"
+import TodoList from "./componets/todoList/todoList";
 // export const AkshayProgress = ({ progress }) => {
 //   const [animatedProgress, setAnimatedProgress] = useState(0);
 
@@ -63,7 +64,8 @@ clearInterval(timer)
             </div>
         ))
       } */}
-      <ProgressBarPro progress={progress} color={"lightgreen"} />
+      {/* <ProgressBarPro progress={progress} color={"lightgreen"} /> */}
+      <TodoList/>
 
     </div>
   );
