@@ -64,7 +64,7 @@ clearInterval(timer)
             </div>
         ))
       } */}
-      {/* <ProgressBarPro progress={progress} color={"lightgreen"} /> */}
+      <ProgressBarPro progress={progress} color={"lightgreen"} />
       <TodoList/>
 
     </div>
