@@ -1,42 +1,37 @@
-import { useState, useTransition } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
   const data = [
     {
       id: "name",
       label: "Name",
-      inputType: "text",
-      buttonName: "Next",
-      placeholder: "Enter your Name",
+      type: "text",
+      buttonType: "Next",
     },
     {
       id: "email",
-      label: "email",
-      inputType: "text",
-      buttonName: "Next",
-      placeholder: "Enter your email",
+      label: "Email",
+      type: "email",
+      buttonType: "Next",
     },
     {
       id: "password",
-      label: "password",
-      inputType: "text",
-      buttonName: "Next",
-      placeholder: "Enter your password",
+      label: "Password",
+      type: "password",
+      buttonType: "Next",
     },
     {
       id: "dob",
-      label: "Dob",
-      inputType: "date",
-      buttonName: "submit",
-      placeholder: "",
+      label: "DOB",
+      type: "date",
+      buttonType: "submit",
     },
   ];
-
-  const [form, setFrom] = useState(data);
+  //store your data in state form and also create a state for dispalying formdata with id
   const [index, setIndex] = useState(0);
+  const [forms, setForms] = useState(data);
+const [submitted ,setSubmitted] = useState(false)
+  // create a form to sumbit the data
   const [formData, setFormdata] = useState({
     name: "",
     email: "",
@@ -44,69 +39,53 @@ function App() {
     dob: "",
   });
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const handleFormSubmit = (e) => {
+    setFormdata((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(name,formData)
+  };
 
-  const handleClick = (e) => {
+  const handleChange = (e) => {
     e.preventDefault();
-    if (index === form.length - 1) {
-      console.log("form submitted");
-      setFormSubmitted(true)
+    if (index === forms.length - 1) {
+      alert("form submitted");
+      setSubmitted(true)
     } else {
-      setIndex((prev) => prev + 1);
+      setIndex((p) => p + 1);
     }
   };
 
-  const handleBack = (e) => {
-    e.preventDefault();
-    setIndex((prev) => prev - 1);
-  };
-
-  const handleInputChange = (e) => {
-    const id = e.target.id;
-    const value = e.target.value;
-
-    const copyFromData = { ...formData };
-    copyFromData[id] = value;
-    setFormdata(copyFromData);
-  };
-  console.log("formData", formData);
-
   return (
     <div className="app">
-      {index > 0 && (
-        <a href="/" onClick={handleBack}>
-          Back
-        </a>
-      )}
-    
-       {
-        !formSubmitted ? (
-          <form onSubmit={handleClick} className="container">
-          <label>{form[index].label}</label>
-          <input
-            value={formData[form[index].id]}
-            id={form[index].id}
-            onChange={handleInputChange}
-            type={form[index].inputType}
-            placeholder={form[index].placeholder}
-          />
-          <button className="btn">{form[index].buttonName}</button>
-        </form>
-        ):(
-          <div className="success">
-          <h1>Sucess</h1>
-          <p> Name:{formData.name}</p>
-          <p>Emaill:{formData.email}</p>
-          <p>Password:{formData.password}</p>
-          <p>Dob:{formData.dob}</p>
-        </div>
-        )
-       }
-    
-      
-     
+      <h2>React MutliStep Form</h2>
+     {
+      submitted ? (
+        <div>
+          <h2>Sumitted form Details</h2>
+          <hr></hr>
+          <span>Name: {formData.name}</span>
+          <br></br>
+          <span>Email:{formData.email}</span>
+           <br></br>
+          <span>Password:{formData.password}</span>
+           <br></br>
+          <span>Dob:{formData.dob}</span>
+          </div>
+      ):(
+         <form className="container" onSubmit={handleChange}>
+        <a href="/"></a>
+        <label>{forms[index].label}</label>
+        <input
+          value={formData[forms[index].id]}
+          id={forms[index].id}
+          type={forms[index].type}
+           name={forms[index].id}
+          onChange={handleFormSubmit}
+        />
+        <button>{forms[index].buttonType}</button>
+      </form>
+      )
+     }
     </div>
   );
-}
-
+};
 export default App;
