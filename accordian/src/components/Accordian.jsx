@@ -26,6 +26,7 @@ const [open , setOpen] = useState(null)
 const toggleHandle =(index)=>{
 setOpen(open === index ? null : index)
 }
+
   return (
     <div className="accordian">
       {data.map((item, index) => (
