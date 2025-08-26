@@ -1,24 +1,43 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from "react";
 
-const Accordian = ({title , content}) => {
-const[ShowAccodian, setShowAccodian] = useState(false)
+const Accordian = () => {
+  const data = [
+    {
+      title: "React.js",
+      content: "Let's learn nodejs in 10 min",
+    },
+    {
+      title: "Express.js",
+      content: "Let's learn nodejs in 10 min",
+    },
+    {
+      title: "Mongodb.js",
+      content: "Let's learn nodejs in 10 min",
+    },
+    {
+      title: "prisma.js",
+      content: "Let's learn nodejs in 10 min",
+    },
+  ];
+
+const [open , setOpen] = useState(null)
 
 
-const handleClick=()=>{
-    setShowAccodian(!ShowAccodian)
+const toggleHandle =(index)=>{
+setOpen(open === index ? null : index)
 }
   return (
-    <div className='accordion'>
-
-        <div className='accordion-title'>
-            {title}
-            <span className='plus' onClick={handleClick}> +
-            </span>
+    <div className="accordian">
+      {data.map((item, index) => (
+        <div key={index} className="accordian-item">
+           <button  onClick={()=>toggleHandle(index)}  className="title">{item.title}
+            <span>{open ===index  ? "-" : "+"}</span>
+          </button>
+         {open === index && <div className="content">{item.content}</div>} 
         </div>
-        {ShowAccodian && <p className='accordion-content'>{content}</p>}
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Accordian
+export default Accordian;
