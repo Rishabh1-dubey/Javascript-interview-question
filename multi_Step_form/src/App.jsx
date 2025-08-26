@@ -67,7 +67,7 @@ const [submitted ,setSubmitted] = useState(false)
           <span>Email:{formData.email}</span>
            <br></br>
           <span>Password:{formData.password}</span>
-           <br></br>
+           <br></br>z
           <span>Dob:{formData.dob}</span>
           </div>
       ):(
