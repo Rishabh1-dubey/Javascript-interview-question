@@ -33,7 +33,7 @@ function App() {
   };
   return (
     <div>
-      <h1>Otp login</h1>
+      <h1>Otp login </h1>
       {inputArr.map((input, index) => (
         <input
           key={index}
