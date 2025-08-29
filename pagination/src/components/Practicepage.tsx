@@ -1,61 +1,49 @@
-import { CircleArrowLeft, CircleArrowRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 const Practicepage = () => {
 
   const [product, setProduct] = useState([])
-  const [page, setPage] = useState(1)
+const [currentPage,setCurrentPage] = useState(0)
 
-  const fetchData = async () => {
+  const fetchProduct = async () => {
 
-    const response = await fetch("https://dummyjson.com/products?limit=100");
-    const data = await response.json()
-    console.log(data)
-    if (data && data.products) {
-      setProduct(data.products)
-    }
+    const data = await fetch("https://dummyjson.com/products?limit=90")
+    const json = await data.json()
+    // console.log(json)
+    setProduct(json.products)
+
   }
+
   useEffect(() => {
-    fetchData()
+    fetchProduct()
   }, [])
 
-const SelectedPage=(selectpage)=>{
-  setPage(selectpage)
+  const PAGE_SIZE =10
+const totalProducts = product.length
+const noOfPages = Math.ceil(totalProducts/ PAGE_SIZE )
+const start = currentPage * PAGE_SIZE
+const end = start + PAGE_SIZE
+
+const handlePageChange =(n)=>{
+setCurrentPage(n)
 }
 
 
   return (
-    <div className='main_container'>
-      {
-        product.length > 0 && (
-          <div className='product'>
+    <div className='app'>
+      <div>{[...Array(noOfPages).keys()].map((n)=>(<button onClick={()=>handlePageChange(n)}  className={"array-num" + (n ===currentPage ? "active" : "")} key={n}>{n}</button>))}</div>
+      <div className='container'>
+        {
+          product.slice(start,end).map((prod, index) => (
 
-
-
-            {
-              product.slice(page * 10 - 10, page * 10).map((prod) => (<div className='product-box'>
-                <img className='image-main' src={prod.thumbnail
-                } />
-                <div>{prod.title}</div>
-
-
-              </div>))
-            }
-          </div>
-        )
-      }
-
-      <div className='pagination'>
-        <button disabled={page===1} onClick={()=>SelectedPage(page-1)}>
-          <CircleArrowLeft />
-        </button>
-        {[...Array(product.length / 10)].map((_, i) => (<span onClick={()=>SelectedPage(i+1)} className={page===i+1 ?"selected-pagination" :""}>
-{i+1}
-        </span>))}
-        <button disabled={page ===Math.ceil(product.length/10)} onClick={()=>SelectedPage(page+1)}>
-          <CircleArrowRight />
-        </button>
+            <div className='product-card'>
+              <img src={prod?.thumbnail} alt='' className='product-img' />
+              <span className='title'>{prod?.title}</span>
+            </div>
+          ))
+        }
       </div>
+
     </div>
   )
 }
