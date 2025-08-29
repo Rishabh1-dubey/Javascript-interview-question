@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 const Practicepage = () => {
 
   const [product, setProduct] = useState([])
-const [currentPage,setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
 
   const fetchProduct = async () => {
 
@@ -18,23 +18,23 @@ const [currentPage,setCurrentPage] = useState(0)
     fetchProduct()
   }, [])
 
-  const PAGE_SIZE =10
-const totalProducts = product.length
-const noOfPages = Math.ceil(totalProducts/ PAGE_SIZE )
-const start = currentPage * PAGE_SIZE
-const end = start + PAGE_SIZE
+  const PAGE_SIZE = 10
+  const totalProducts = product.length
+  const noOfPages = Math.ceil(totalProducts / PAGE_SIZE)
+  const start = currentPage * PAGE_SIZE
+  const end = start + PAGE_SIZE
 
-const handlePageChange =(n)=>{
-setCurrentPage(n)
-}
+  const handlePageChange = (n) => {
+    setCurrentPage(n)
+  }
 
 
   return (
     <div className='app'>
-      <div>{[...Array(noOfPages).keys()].map((n)=>(<button onClick={()=>handlePageChange(n)}  className={"array-num" + (n ===currentPage ? "active" : "")} key={n}>{n}</button>))}</div>
+      <div>{[...Array(noOfPages).keys()].map((n) => (<button onClick={() => handlePageChange(n)} className={"array-num" + (n === currentPage ? "active" : "")} key={n}>{n}</button>))}</div>
       <div className='container'>
         {
-          product.slice(start,end).map((prod, index) => (
+          product.slice(start, end).map((prod, index) => (
 
             <div className='product-card'>
               <img src={prod?.thumbnail} alt='' className='product-img' />
